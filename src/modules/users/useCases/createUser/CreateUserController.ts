@@ -6,7 +6,28 @@ class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
   handle(request: Request, response: Response): Response {
-    // Complete aqui
+    try {
+      const { email, name } = request.body;
+
+      if (!email) {
+        throw new Error("Missing email param");
+      }
+
+      if (!name) {
+        throw new Error("Missing name param");
+      }
+
+      const user = this.createUserUseCase.execute({
+        email,
+        name,
+      });
+
+      return response.status(201).json(user);
+    } catch (error) {
+      return response
+        .status(400)
+        .json({ error: error ?? "Internal server error" });
+    }
   }
 }
 

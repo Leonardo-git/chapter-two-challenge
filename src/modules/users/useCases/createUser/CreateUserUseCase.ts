@@ -9,8 +9,14 @@ interface IRequest {
 class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  execute({ email, name }: IRequest): User {
-    // Complete aqui
+  execute(data: IRequest): User {
+    const user = this.usersRepository.findByEmail(data.email);
+
+    if (user) {
+      throw new Error("User already exists");
+    }
+
+    return this.usersRepository.create(data);
   }
 }
 
