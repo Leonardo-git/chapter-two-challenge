@@ -12,9 +12,7 @@ class ListAllUsersController {
         this.listAllUsersUseCase.execute({ user_id: user_id.toString() })
       );
     } catch (error) {
-      return response
-        .status(400)
-        .json({ error: error ?? "Internal server error" });
+      return response.status(400).json({ error: error.message });
     }
   }
 }

@@ -17,9 +17,7 @@ class TurnUserAdminController {
 
       return response.send(user);
     } catch (error) {
-      return response
-        .status(404)
-        .json({ error: error ?? "Internal server error" });
+      return response.status(404).json({ error: error.message });
     }
   }
 }

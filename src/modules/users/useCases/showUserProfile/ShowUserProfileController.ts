@@ -15,9 +15,7 @@ class ShowUserProfileController {
 
       return response.json(this.showUserProfileUseCase.execute({ user_id }));
     } catch (error) {
-      return response
-        .status(404)
-        .json({ error: error ?? "Internal server error" });
+      return response.status(404).json({ error: error.message });
     }
   }
 }
